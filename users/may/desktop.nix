@@ -3,22 +3,14 @@
 {
 
   home.pointerCursor = {
-    name = "Nordzy-cursors";
-    package = pkgs.nordzy-cursor-theme;
+    name = "Bibata Ghost";
+    package = pkgs.bibata-cursors-translucent;
     size = 64;
     gtk.enable = true;
   };
 
   gtk = {
     enable = true;
-    theme = {
-      name = "Nordic";
-      package = pkgs.nordic;
-    };
-    iconTheme = {
-      name = "Nordzy";
-      package = pkgs.nordzy-icon-theme;
-    };
   };
 
   services.mpris-proxy.enable = true;
@@ -45,7 +37,7 @@
     nvidiaPatches = false;
     extraConfig = builtins.readFile ./hyprland.conf
                   + "exec-once=waybar&\n"
-                  + "bind=SUPER,SPACE,exec,rofi -show";
+                  + "bind=SUPER,SPACE,exec,rofi -show\n";
   };
 
   programs.waybar = {
@@ -88,8 +80,8 @@
 
   programs.qutebrowser = {
     enable = true;
-    extraConfig = "config.source('${./theme-files/catppuccin-qutebrowser.py}')";
   };
+  programs.chromium.enable = true;
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;

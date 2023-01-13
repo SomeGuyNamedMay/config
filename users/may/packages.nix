@@ -14,8 +14,7 @@
         #games
         lutris bottles gamescope xivlauncher
         steam onscripter-en discord
-        blesh airshipper osu-lazer xonotic
-
+        blesh airshipper 
         ytfzf minecraft fuzzel
 
         xfce.thunar imv evince pavucontrol

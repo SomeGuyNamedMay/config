@@ -26,7 +26,6 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "nord";
       editor = {
         bufferline = "multiple";
         cursorline = true;
@@ -65,65 +64,66 @@
     enable = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
-    settings = {
-      add_newline = false;
-      continuation_prompt = "▶▶";
-      format = lib.concatStrings [
-        "[░▒▓](#a3aed2)"
-        "[  ](bg:#a3aed2 fg:#090c0c)"
-        "[](bg:#769ff0 fg:#a3aed2)"
-        "$directory"
-        "[](fg:#769ff0 bg:#394260)"
-        "$git_branch"
-        "$git_status"
-        "[](fg:#394260 bg:#212736)"
-        "$rust"
-        "[](fg:#212736 bg:#1d2230)"
-        "$sudo"
-        "[ ](fg:#1d2230)"
-        "\n$character"
-      ];
-      directory = {
-        style = "fg:#e3e5e5 bg:#769ff0";
-        format = "[ $path ]($style)";
-        truncation_length = 3;
-        truncation_symbol = "…/";
-        substitutions = {
-          Documents = " ";
-          Downloads = " ";
-          Music = " ";
-          Pictures = " ";
-        };
-      };
+    settings = fromTOML (builtins.readFile ./starship.toml);
+    #settings = {
+    #  add_newline = false;
+    #  continuation_prompt = "▶▶";
+    #  format = lib.concatStrings [
+    #    "[░▒▓](#a3aed2)"
+    #    "[  ](bg:#a3aed2 fg:#090c0c)"
+    #    "[](bg:#769ff0 fg:#a3aed2)"
+    #    "$directory"
+    #    "[](fg:#769ff0 bg:#394260)"
+    #    "$git_branch"
+    #    "$git_status"
+    #    "[](fg:#394260 bg:#212736)"
+    #    "$rust"
+    #    "[](fg:#212736 bg:#1d2230)"
+    #    "$sudo"
+    #    "[ ](fg:#1d2230)"
+    #    "\n$character"
+    #  ];
+    #  directory = {
+    #    style = "fg:#e3e5e5 bg:#769ff0";
+    #    format = "[ $path ]($style)";
+    #    truncation_length = 3;
+    #    truncation_symbol = "…/";
+    #    substitutions = {
+    #      Documents = " ";
+    #      Downloads = " ";
+    #      Music = " ";
+    #      Pictures = " ";
+    #    };
+    #  };
 
-      git_branch = {
-        symbol = "";
-        style = "bg:#394260";
-        format = "[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)";
-      };
+    #  git_branch = {
+    #    symbol = "";
+    #    style = "bg:#394260";
+    #    format = "[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)";
+    #  };
 
-      git_status = {
-        style = "bg:#394260";
-        format = "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
-      };
+    #  git_status = {
+    #    style = "bg:#394260";
+    #    format = "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
+    #  };
 
-      rust = {
-        symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
-      };
-      
-      sudo = {
-        style = "bold green";
-        symbol = "";
-        disabled = false;
-        format = "[[ $symbol ](fg:#769ff0 bg:#1d2230)]($style)";
-      };
+    #  rust = {
+    #    symbol = "";
+    #    style = "bg:#212736";
+    #    format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+    #  };
+    #  
+    #  sudo = {
+    #    style = "bold green";
+    #    symbol = "";
+    #    disabled = false;
+    #    format = "[[ $symbol ](fg:#769ff0 bg:#1d2230)]($style)";
+    #  };
 
-      character = {
-        success_symbol = "";
-        error_symbol = "";
-      };
-    };
+    #  character = {
+    #    success_symbol = "";
+    #    error_symbol = "";
+    #  };
+    #};
   };
 }
