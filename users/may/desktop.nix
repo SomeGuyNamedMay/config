@@ -3,14 +3,20 @@
 {
 
   home.pointerCursor = {
-    name = "Bibata Ghost";
-    package = pkgs.bibata-cursors-translucent;
-    size = 64;
+    name = "phinger-cursors-light";
+    package = pkgs.phinger-cursors;
+    size = 32;
     gtk.enable = true;
   };
 
+  services.gnome-keyring.enable = true;
+
   gtk = {
     enable = true;
+    iconTheme = {
+      name = "Zafiro-icons-Dark";
+      package = pkgs.zafiro-icons;
+    };
   };
 
   services.mpris-proxy.enable = true;
@@ -36,22 +42,48 @@
     };
     nvidiaPatches = false;
     extraConfig = builtins.readFile ./hyprland.conf
-                  + "exec-once=waybar&\n"
                   + "bind=SUPER,SPACE,exec,rofi -show\n";
   };
+
+  #programs.ironbar = {
+  #  enable = true;
+  #  systemd = true;
+  #  config = {
+  #    position = "right";
+  #    start = [
+  #      {
+  #        type = "focused";
+  #        show_icon = true;
+  #        show_title = false;
+  #        icon_size = 32;
+  #        icon_theme = "Zafiro";
+  #      }
+  #      {
+  #        type = "workspaces";
+  #      }
+  #    ];
+  #    end = [
+  #      {
+  #        type = "tray";
+  #      }
+  #    ];
+  #  };
+  #  style = "";
+  #};
 
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     });
+    systemd.enable = true;
     style = ./nord-waybar.css;
     settings = {
       mainBar = {
         layer = "top";
         position = "top";
         height = 20;
-        modules-left = [ "wlr/workspaces" "wlr/taskbar" ];
+        modules-left = [ "wlr/workspaces" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [ "tray" "bluetooth" "pulseaudio" "battery" ];
         "wlr/workspaces" = {
@@ -66,7 +98,6 @@
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    theme = ./nord.rasi;
     extraConfig = {
       modi = "drun,run";
       sidebar-mode = true;
@@ -80,6 +111,9 @@
 
   programs.qutebrowser = {
     enable = true;
+    settings = {
+      scrolling.smooth = true;
+    };
   };
   programs.chromium.enable = true;
   programs.firefox = {
@@ -108,7 +142,7 @@
 
   programs.kitty = {
     enable = true;
-    theme = "Nord";
+    font.size = 14;
   };
 
   programs.foot.enable = true;
@@ -133,12 +167,6 @@
   };
   services.fnott = {
     enable = true;
-  };
-
-  services.gammastep = {
-    enable = true;
-    dawnTime = "6:00-7:45";
-    duskTime = "18:35-20:15";
   };
 
   programs.mpv = {

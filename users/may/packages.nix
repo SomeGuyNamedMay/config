@@ -1,5 +1,9 @@
 {pkgs, config, lib, ...}:
-
+let
+  pythonPackages = p: with p; [
+    dbus-python
+  ];
+in
 {
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "steam"
@@ -18,7 +22,7 @@
         ytfzf minecraft fuzzel
 
         xfce.thunar imv evince pavucontrol
-        blueberry wlogout fractal zathura
+        blueberry wlogout fractal-next zathura gimp
         libreoffice inkscape blender
         openscad freecad hikari cura
         xdg-utils mpvpaper betterdiscordctl 
@@ -32,11 +36,8 @@
         #programming stuff
         ghc cabal-install stack haskell-language-server stylish-haskell stack git
         rustc cargo rust-analyzer rustfmt clang astyle rnix-lsp nixfmt
-    ] ++ (with python39Packages; [
-      python  yapf
-      python-lsp-server
-    ])
-++ (with rubyPackages_3_1; [
+        (python3.withPackages pythonPackages)
+    ] ++ (with rubyPackages_3_1; [
   ruby rufo
   solargraph
 ]) ++ (with luajitPackages; [

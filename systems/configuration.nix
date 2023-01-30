@@ -15,7 +15,30 @@
     enable = true;
     wlr.enable = true;
   };
+  programs.seahorse.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
+      };
+      initial_session = {
+        command = "Hyprland";
+        user = "mason";
+      };
+    };
+  };
+  
   services.dbus.enable = true;
+  services.octoprint.enable = true;
+
+  services.gvfs.enable = true;
+
+  programs.hyprland.enable = true;
+
+  services.tumbler.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -36,26 +59,18 @@
   # Enable sound with pipewire.
   security.rtkit.enable = true;
 
-  fonts = {
-      enableDefaultFonts = true;
-      fonts = with pkgs;  [
-          cascadia-code
-          nerdfonts
-      ];
-      fontconfig = {
-          defaultFonts = {
-              serif = [ "Cascadia Code" ];
-              sansSerif = [ "Cascadia Code" ];
-              monospace = [ "Cascadia Code" ];
-          };
-      };
-  };
+  #fonts = {
+  #    fonts = with pkgs;  [
+  #        cascadia-code
+  #        nerdfonts
+  #    ];
+  #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mason = {
     isNormalUser = true;
     description = "Mason Dear";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "video" "audio" "kvm" "" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "video" "audio" "kvm" "dialout" "octoprint" "greetd"];
     shell = pkgs.zsh;
   };
 

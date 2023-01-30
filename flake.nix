@@ -11,17 +11,40 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ironbar = {
+      url = "github:JakeStanger/ironbar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, home-manager, nur, stylix, hyprland, ...}:
+  outputs = { self, nixpkgs, home-manager, nur, stylix, hyprland, ironbar, ...}:
     let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
       shared-modules = [
         stylix.nixosModules.stylix
+        hyprland.nixosModules.default
         home-manager.nixosModules.home-manager
         {
           stylix.image = ./resources/wallpapers/log-horizon.jpg;
+          stylix.polarity = "dark";
+          stylix.fonts = {
+            serif = {
+              package = pkgs.nerdfonts;
+              name = "FiraCode Nerd Font";
+            };
+            sansSerif = {
+              package = pkgs.nerdfonts;
+              name = "FiraCode Nerd Font";
+            };
+            monospace = {
+              package = pkgs.nerdfonts;
+              name = "FiraCode Nerd Font Mono";
+            };
+            
+          };
           home-manager.users.mason = {
             imports = [
                 hyprland.homeManagerModules.default
+                ironbar.homeManagerModules.default
                 nur.hmModules.nur
                 ./users/may/desktop.nix 
                 ./users/may/kakoune.nix
