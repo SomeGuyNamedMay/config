@@ -17,12 +17,12 @@ in
     home.packages = with pkgs; [
         #games
         lutris bottles gamescope xivlauncher
-        steam onscripter-en discord
+        steam onscripter-en discord osu-lazer
         blesh airshipper 
         ytfzf minecraft fuzzel
 
         xfce.thunar imv evince pavucontrol
-        blueberry wlogout fractal-next zathura gimp
+        blueberry wlogout fractal zathura gimp
         libreoffice inkscape blender
         openscad freecad hikari cura
         xdg-utils mpvpaper betterdiscordctl 
@@ -31,12 +31,13 @@ in
 
         cachix aria2
         # text stuff
-        ##texlive.combined.scheme-medium texlab
+        texlive.combined.scheme-medium texlab
         ##ltex-ls pandoc
         #programming stuff
         ghc cabal-install stack haskell-language-server stylish-haskell stack git
         rustc cargo rust-analyzer rustfmt clang astyle rnix-lsp nixfmt
-        (python3.withPackages pythonPackages)
+        maven openjdk
+        (python3.withPackages pythonPackages) coq
     ] ++ (with rubyPackages_3_1; [
   ruby rufo
   solargraph

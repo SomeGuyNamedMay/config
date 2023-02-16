@@ -138,15 +138,15 @@
 (global-flycheck-mode)
 
 ;; note taking stuff
-(latex-preview-pane-enable)
+;;(latex-preview-pane-enable)
 ;; programming stuff
 (nix-mode)
 (rust-mode)
 (haskell-mode)
 (add-hook 'haskell-mode-hook
-	  (lambda ()
+      (lambda () 
 	    (push '("\" . ?λ) prettify-symbols-alist)))
-
+(add-hook 'haskell-mode-hook (lambda ()  (push '("forall" . ?∀) prettify-symbols-alist)))
 ;; lsp language hooks
 (add-hook 'rust-mode-hook 'lsp)
 (add-hook 'haskell-mode-hook 'lsp)

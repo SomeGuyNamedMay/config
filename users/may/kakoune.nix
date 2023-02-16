@@ -23,6 +23,12 @@ in
                     option = "filetype=(rust|c|cpp|haskell)";
                     commands = "lsp-enable-window";
                 }
+                {
+                    name = "WinSetOption";
+                    group = "global";
+                    option = "filetype=(latex|haskell)";
+                    commands = "map window insert <a-l> λ";
+                }
             ];
             numberLines.enable = true;
             numberLines.highlightCursor = true;

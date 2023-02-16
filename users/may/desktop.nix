@@ -45,39 +45,12 @@
                   + "bind=SUPER,SPACE,exec,rofi -show\n";
   };
 
-  #programs.ironbar = {
-  #  enable = true;
-  #  systemd = true;
-  #  config = {
-  #    position = "right";
-  #    start = [
-  #      {
-  #        type = "focused";
-  #        show_icon = true;
-  #        show_title = false;
-  #        icon_size = 32;
-  #        icon_theme = "Zafiro";
-  #      }
-  #      {
-  #        type = "workspaces";
-  #      }
-  #    ];
-  #    end = [
-  #      {
-  #        type = "tray";
-  #      }
-  #    ];
-  #  };
-  #  style = "";
-  #};
-
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     });
     systemd.enable = true;
-    style = ./nord-waybar.css;
     settings = {
       mainBar = {
         layer = "top";
@@ -122,15 +95,15 @@
     profiles = {
       mason = {
         isDefault = true;
+        extensions = with config.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          sponsorblock
+          stylus
+          sidebery
+          vimium
+        ];
       };
     };
-    extensions = with config.nur.repos.rycee.firefox-addons; [
-      ublock-origin
-      sponsorblock
-      stylus
-      sidebery
-#      vimium
-    ];
   };
 
   programs.zathura = {
@@ -188,6 +161,9 @@
     enable = true;
     defaultApplications = {
       "image/png" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/gif" = [ "imv.desktop" ];
+      "application/pdf" = [ "org.pwmt.zathura-pdf-mupdf.desktop" ];
       "text/plain" = [ "emacs.desktop" ];
       "inode/directory" = [ "thunar.desktop" ];
     };
