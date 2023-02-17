@@ -56,9 +56,25 @@
         layer = "top";
         position = "top";
         height = 20;
-        modules-left = [ "wlr/workspaces" ];
+        modules-left = [ "wlr/workspaces" "hyprland/submap" ];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "tray" "bluetooth" "pulseaudio" "battery" ];
+        modules-right = [ "wireplumber" "network" "upower" "clock" ];
+        "wireplumber" = {
+          format = "{volume}% {icon}";
+          format-muted = "";
+          on-click = "helvum";
+          format-icons = [ "" "" "" ];
+        };
+        "upower" = {
+          icon-size = 20;
+          hide-if-empty = false;
+        };
+        "network" = {
+          format = "{ifname}";
+          format-wifi = "{essid} ({signalStrength}%) ";
+          format-ethernet = "{ipaddr}/{cidr} ";
+          format-disconnected = "";
+        };
         "wlr/workspaces" = {
           format = "{icon}";
           on-click = "activate";
@@ -120,24 +136,6 @@
 
   programs.foot.enable = true;
 
-  programs.wezterm = {
-    enable = true;
-    colorSchemes = {
-      rainstorm = {
-        ansi = [
-          "#293146" "#ef7577" "#9dc3a1" "#c4be79"
-          "#77addd" "#d5b2fa" "#a5e0dc" "#c0cfe1"
-        ];
-        brights = [
-          "#3a4563" "#ef7577" "#9dc3a1" "#c4be79"
-          "#77addd" "#d5b2fa" "#a5e0dc" "#d9e9fe"
-        ];
-        background = "#293146";
-        foreground = "#d9e9fe";
-      };
-    };
-    extraConfig = builtins.readFile ./wezterm.lua;
-  };
   services.fnott = {
     enable = true;
   };

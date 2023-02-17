@@ -2,6 +2,7 @@
 let
   pythonPackages = p: with p; [
     dbus-python
+    python-lsp-server
   ];
 in
 {
@@ -21,9 +22,9 @@ in
         blesh airshipper 
         ytfzf minecraft fuzzel
 
-        xfce.thunar imv evince pavucontrol
+        xfce.thunar imv evince pavucontrol helvum
         blueberry wlogout fractal zathura gimp
-        libreoffice inkscape blender
+        libreoffice inkscape 
         openscad freecad hikari cura
         xdg-utils mpvpaper betterdiscordctl 
         #shell stuff
@@ -33,14 +34,19 @@ in
         # text stuff
         texlive.combined.scheme-medium texlab
         ##ltex-ls pandoc
+        #config format stuff
+        nil nixfmt taplo yaml-language-server marksman      
         #programming stuff
         ghc cabal-install stack haskell-language-server stylish-haskell stack git
-        rustc cargo rust-analyzer rustfmt clang astyle rnix-lsp nixfmt
-        maven openjdk
+        rustc cargo rust-analyzer rustfmt clang astyle 
+        maven openjdk jdt-language-server
         (python3.withPackages pythonPackages) coq
     ] ++ (with rubyPackages_3_1; [
   ruby rufo
   solargraph
+]) ++ (with nodePackages; [
+  typescript-language-server
+  vscode-langservers-extracted  
 ]) ++ (with luajitPackages; [
   lua stylua
   lua-lsp

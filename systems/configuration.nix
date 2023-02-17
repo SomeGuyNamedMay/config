@@ -9,6 +9,8 @@
   nix.gc.automatic = true;
   nix.optimise.automatic = true;
 
+  services.upower.enable = true;
+
   programs.dconf.enable = true;
   programs.gamemode.enable = true;
   xdg.portal = {
