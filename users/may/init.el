@@ -1,4 +1,4 @@
-;; keyboard layout
+ keyboard layout
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -136,6 +136,9 @@
 (dashboard-setup-startup-hook)
 (dirvish-override-dired-mode)
 (global-flycheck-mode)
+(centaur-tabs-mode t)
+(setq centaur-tabs-style "bar")
+(setq centaur-tabs-set-icons t)
 
 ;; note taking stuff
 (latex-preview-pane-enable)
@@ -143,10 +146,10 @@
 (nix-mode)
 (rust-mode)
 (haskell-mode)
-(add-hook 'haskell-mode-hook
-	  (lambda ()
-	    (push '("\" . ?λ) prettify-symbols-alist)))
+
 
 ;; lsp language hooks
 (add-hook 'rust-mode-hook 'lsp)
 (add-hook 'haskell-mode-hook 'lsp)
+(add-hook 'java-mode-hook 'lsp)
+(add-hook 'coq-mode-hook #'company-coq-mode)

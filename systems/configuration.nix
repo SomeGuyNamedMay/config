@@ -7,7 +7,16 @@
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc.automatic = true;
+  programs.nix-ld.enable = true;
   nix.optimise.automatic = true;
+
+  services.transmission.enable = true;
+
+  services.udisks2.enable = true;
+
+  services.jmusicbot = {
+    enable = true;
+  };
 
   services.upower.enable = true;
 
@@ -16,6 +25,10 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+    ];
   };
   programs.seahorse.enable = true;
   services.gnome.gnome-keyring.enable = true;
@@ -72,7 +85,7 @@
   users.users.mason = {
     isNormalUser = true;
     description = "Mason Dear";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "video" "audio" "kvm" "dialout" "octoprint" "greetd"];
+    extraGroups = [ "networkmanager" "transmission" "wheel" "libvirtd" "video" "audio" "kvm" "dialout" "octoprint" "greetd"];
     shell = pkgs.zsh;
   };
 

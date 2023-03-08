@@ -8,6 +8,11 @@
       startWhenNeeded = true;
     };
   };
+
+  services.mpd-discord-rpc.enable = true;
+  services.mpd-mpris.enable = true;
+  services.mpris-proxy.enable = true;
+
   programs.ncmpcpp = {
     enable = true;
     bindings = [

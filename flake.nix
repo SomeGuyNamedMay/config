@@ -6,17 +6,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    stylix.url = "github:SomeGuyNamedMy/stylix";
+    stylix.url = "github:SomeGuyNamedMy/stylix/hyprland-support";
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ironbar = {
-      url = "github:JakeStanger/ironbar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
-  outputs = { self, nixpkgs, home-manager, nur, stylix, hyprland, ironbar, ...}:
+  outputs = { self, nixpkgs, home-manager, nur, stylix, hyprland, emacs-overlay, ...}:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       shared-modules = [
@@ -41,10 +38,10 @@
             };
             
           };
+          nixpkgs.overlays = [ (import emacs-overlay) ];
           home-manager.users.mason = {
             imports = [
                 hyprland.homeManagerModules.default
-                ironbar.homeManagerModules.default
                 nur.hmModules.nur
                 ./users/may/desktop.nix 
                 ./users/may/kakoune.nix
@@ -53,6 +50,7 @@
                 ./users/may/programming-env.nix
                 ./users/may/shell.nix
             ];
+            nixpkgs.overlays = [ (import emacs-overlay) ];
             home = {
               stateVersion = "22.11";
               username = "mason";

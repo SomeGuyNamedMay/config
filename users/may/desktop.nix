@@ -42,6 +42,7 @@
     };
     nvidiaPatches = false;
     extraConfig = builtins.readFile ./hyprland.conf
+                  + "bind=SUPER_SHIFT,Q,exec,${pkgs.wlogout}/bin/wlogout\n"
                   + "bind=SUPER,SPACE,exec,rofi -show\n";
   };
 
@@ -56,14 +57,21 @@
         layer = "top";
         position = "top";
         height = 20;
-        modules-left = [ "wlr/workspaces" "hyprland/submap" ];
+        modules-left = [ "user" "wlr/workspaces" "hyprland/submap" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [ "wireplumber" "network" "upower" "clock" ];
+        "user" = {
+          format = "{user}";
+          interval = 60;
+          height = 30;
+          width = 30;
+          icon = true;
+        };
         "wireplumber" = {
           format = "{volume}% {icon}";
-          format-muted = "";
+          format-muted = " ";
           on-click = "helvum";
-          format-icons = [ "" "" "" ];
+          format-icons = [ " " " " " " ];
         };
         "upower" = {
           icon-size = 20;
@@ -71,8 +79,8 @@
         };
         "network" = {
           format = "{ifname}";
-          format-wifi = "{essid} ({signalStrength}%) ";
-          format-ethernet = "{ipaddr}/{cidr} ";
+          format-wifi = "{essid} ({signalStrength}%)  ";
+          format-ethernet = "{ipaddr}/{cidr}  ";
           format-disconnected = "";
         };
         "wlr/workspaces" = {
@@ -83,6 +91,7 @@
       };
     };
   };
+  services.network-manager-applet.enable = true;
 
   programs.rofi = {
     enable = true;
@@ -95,8 +104,15 @@
       display-run = "";
       display-drun = "";
       display-window = "﩯";
+    };
   };
-};
+
+  programs.wlogout = {
+      enable = true;
+  };
+  services.avizo = {
+      enable = true;
+  };
 
   programs.qutebrowser = {
     enable = true;
@@ -124,9 +140,6 @@
 
   programs.zathura = {
     enable = true;
-    extraConfig = ''
-      include ${./theme-files/catppuccin-frappe-zathura}
-    '';
   };
 
   programs.kitty = {
@@ -136,9 +149,11 @@
 
   programs.foot.enable = true;
 
-  services.fnott = {
+  services.mako = {
     enable = true;
   };
+  services.udiskie.enable = true;
+  services.poweralertd.enable = true;
 
   programs.mpv = {
     enable = true;
