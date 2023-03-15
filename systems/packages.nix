@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     trashy
     tldr
+    pamixer
     home-manager
   ];
 }

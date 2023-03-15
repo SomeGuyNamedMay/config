@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, stylix, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -14,9 +14,9 @@
 
   services.udisks2.enable = true;
 
-  services.jmusicbot = {
-    enable = true;
-  };
+  programs.light.enable = true;
+
+
 
   services.upower.enable = true;
 
@@ -25,7 +25,6 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
     ];

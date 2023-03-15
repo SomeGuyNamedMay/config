@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: #my-wallpapers, ... }:
+{ pkgs, lib, config, ... }: # my-wallpapers, ... }:
 
 {
 
@@ -27,9 +27,7 @@
   };
 
   dconf.settings = {
-    "org/gnome/desktop/wm/preferences" = {
-      button-layout = "menu:appmenu";
-    };
+    "org/gnome/desktop/wm/preferences" = { button-layout = "menu:appmenu"; };
   };
 
   wayland.windowManager.hyprland = {
@@ -41,9 +39,11 @@
       hidpi = true;
     };
     nvidiaPatches = false;
-    extraConfig = builtins.readFile ./hyprland.conf
-                  + "bind=SUPER_SHIFT,Q,exec,${pkgs.wlogout}/bin/wlogout\n"
-                  + "bind=SUPER,SPACE,exec,rofi -show\n";
+    extraConfig = builtins.readFile ./hyprland.conf + ''
+      bind=SUPER_SHIFT,Q,exec,${pkgs.wlogout}/bin/wlogout
+    '' + ''
+      bind=SUPER,SPACE,exec,rofi -show
+    '';
   };
 
   programs.waybar = {
@@ -107,18 +107,12 @@
     };
   };
 
-  programs.wlogout = {
-      enable = true;
-  };
-  services.avizo = {
-      enable = true;
-  };
+  programs.wlogout = { enable = true; };
+  services.avizo = { enable = true; };
 
   programs.qutebrowser = {
     enable = true;
-    settings = {
-      scrolling.smooth = true;
-    };
+    settings = { scrolling.smooth = true; };
   };
   programs.chromium.enable = true;
   programs.firefox = {
@@ -127,37 +121,83 @@
     profiles = {
       mason = {
         isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "https://github.com/SomeGuyNamedMy/";
+          "browser.tabs.tabmanager.enabled" = false;
+          # privacy stuff
+          "privacy.donottrackheader.enabled" = true;
+          "privacy.trackingprotection.enabled" = true;
+          "privacy.trackingprotection.socialtracking.enabled" = true;
+          "privacy.partition.network_state.ocsp_cache" = true;
+          "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+          "browser.newtabpage.activity-stream.telemetry" = false;
+          "browser.ping-centre.telemetry" = false;
+          "toolkit.telemetry.archive.enabled" = false;
+          "toolkit.telemetry.bhrPing.enabled" = false;
+          "toolkit.telemetry.enabled" = false;
+          "toolkit.telemetry.firstShutdownPing.enabled" = false;
+          "toolkit.telemetry.hybridContent.enabled" = false;
+          "toolkit.telemetry.newProfilePing.enabled" = false;
+          "toolkit.telemetry.reportingpolicy.firstRun" = false;
+          "toolkit.telemetry.shutdownPingSender.enabled" = false;
+          "toolkit.telemetry.unified" = false;
+          "toolkit.telemetry.updatePing.enabled" = false;
+          # As well as Firefox 'experiments'
+          "experiments.activeExperiment" = false;
+          "experiments.enabled" = false;
+          "experiments.supported" = false;
+          "network.allow-experiments" = false;
+
+          # Disable Pocket Integration
+          "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+          "extensions.pocket.enabled" = false;
+          "extensions.pocket.api" = "";
+          "extensions.pocket.oAuthConsumerKey" = "";
+          "extensions.pocket.showHome" = false;
+          "extensions.pocket.site" = "";
+
+          #enable theming
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "layers.acceleration.force-enabled" = true;
+          "gfx.webrender.all" = true;
+          "gfx.webrender.enabled" = true;
+          "layout.css.backdrop-filter.enabled" = true;
+          "svg.context-properties.content.enabled" = true;
+        };
         extensions = with config.nur.repos.rycee.firefox-addons; [
           ublock-origin
           sponsorblock
           stylus
-          sidebery
+          tree-style-tab
           vimium
         ];
+        userChrome = ''
+          #TabsToolbar {
+            visibility: collapse;
+          }
+        '';
       };
     };
   };
 
-  programs.zathura = {
-    enable = true;
-  };
+  programs.zathura = { enable = true; };
 
   programs.kitty = {
     enable = true;
     font.size = 14;
+    settings = {
+      enable_audio_bell = false;
+      confirm_os_window_close = 0;
+    };
   };
 
   programs.foot.enable = true;
 
-  services.mako = {
-    enable = true;
-  };
+  services.mako = { enable = true; };
   services.udiskie.enable = true;
   services.poweralertd.enable = true;
 
-  programs.mpv = {
-    enable = true;
-  };
+  programs.mpv = { enable = true; };
 
   xdg.enable = true;
   xdg.desktopEntries = {

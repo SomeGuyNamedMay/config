@@ -38,7 +38,9 @@
             };
             
           };
-          nixpkgs.overlays = [ (import emacs-overlay) ];
+          nixpkgs.overlays = [
+              (import emacs-overlay)
+          ];
           home-manager.users.mason = {
             imports = [
                 hyprland.homeManagerModules.default
@@ -50,7 +52,9 @@
                 ./users/may/programming-env.nix
                 ./users/may/shell.nix
             ];
-            nixpkgs.overlays = [ (import emacs-overlay) ];
+            nixpkgs.overlays = [
+                (import emacs-overlay)
+            ];
             home = {
               stateVersion = "22.11";
               username = "mason";
@@ -69,10 +73,12 @@
       nixosConfigurations.flex = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = shared-modules ++ [ ./systems/flex/flex-hardware.nix ];
+        extraArgs = {inherit stylix; };
       };
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = shared-modules ++ [ ./systems/desktop/desktop-hardware.nix ];
+        extraArgs = {inherit stylix; };
       };
   }; 
 }

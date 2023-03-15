@@ -1,4 +1,4 @@
- keyboard layout
+;;keyboard layout
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
