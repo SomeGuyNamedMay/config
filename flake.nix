@@ -6,14 +6,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    stylix.url = "github:SomeGuyNamedMy/stylix/hyprland-support";
+    stylix.url = "github:SomeGuyNamedMy/stylix";
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    idris.url = "github:/idris-lang/Idris2";
   };
-  outputs = { self, nixpkgs, home-manager, nur, stylix, hyprland, emacs-overlay, ...}:
+  outputs = { self, nixpkgs, home-manager, nur, stylix, hyprland, emacs-overlay, idris, ...}:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       shared-modules = [
@@ -25,21 +26,32 @@
           stylix.polarity = "dark";
           stylix.fonts = {
             serif = {
-              package = pkgs.nerdfonts;
-              name = "FiraCode Nerd Font";
+              package = pkgs.dejavu_fonts;
+              name = "DejaVu Serif";
             };
             sansSerif = {
-              package = pkgs.nerdfonts;
-              name = "FiraCode Nerd Font";
+              package = pkgs.dejavu_fonts;
+              name = "DejaVu Sans";
             };
             monospace = {
-              package = pkgs.nerdfonts;
-              name = "FiraCode Nerd Font Mono";
+              package = pkgs.dejavu_fonts;
+              name = "DejaVu Sans Mono";
             };
-            
+            sizes = {
+                desktop = 12;
+                applications = 15;
+                terminal = 15;
+                popups = 12;
+            };
+          };
+          stylix.targets = {
+              grub.useImage = true;
           };
           nixpkgs.overlays = [
               (import emacs-overlay)
+            (super: self: {
+                emacsPackages.idris2-mode = idris.packages.x86_64-linux.idris2-mode;
+            })
           ];
           home-manager.users.mason = {
             imports = [
@@ -47,7 +59,8 @@
                 nur.hmModules.nur
                 ./users/may/desktop.nix 
                 ./users/may/kakoune.nix
-                ./users/may/mpd.nix
+                ./users/may/media.nix
+                ./users/may/web.nix
                 ./users/may/packages.nix
                 ./users/may/programming-env.nix
                 ./users/may/shell.nix

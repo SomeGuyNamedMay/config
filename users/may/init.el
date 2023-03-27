@@ -1,3 +1,13 @@
+;; set backup files
+(setq
+ backup-by-copying t
+ backup-directory-alist
+ '(("." . ".backups"))
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)
+
 ;;keyboard layout
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -91,32 +101,18 @@
 (scroll-bar-mode -1)
 (rainbow-mode)
 
-;;theming
-(ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-                                     ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                                     "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                                     "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                                     "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                                     "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                                     "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                                     "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                                     ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                                     "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                                     "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-                                     "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                                     "\\\\" "://"))
 
-(global-ligature-mode)
-(unicode-fonts-setup)
-(load-theme 'nord)
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+;;(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 ;;keybindings
 (require 'meow)
 (meow-setup)
 (meow-global-mode 1)
 (global-aggressive-indent-mode 1)
+(add-hook 'prog-mode-hook #'smartparens-mode)
 
 ;; ui enhancments
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (doom-modeline-mode 1)
 (selectrum-mode)
 
@@ -134,6 +130,13 @@
 ;;(prescient-persist-mode +1)
 
 (dashboard-setup-startup-hook)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq dashboard-set-navigator t)
+(setq dashboard-items '((recents . 5)
+			(projects . 5)))
+(setq dashboard-set-footer nil)
+
 (dirvish-override-dired-mode)
 (global-flycheck-mode)
 (centaur-tabs-mode t)
@@ -142,14 +145,60 @@
 
 ;; note taking stuff
 (latex-preview-pane-enable)
+
+;; project managment
+(projectile-mode)
+
 ;; programming stuff
+(require 'idris2-mode)
+(idris2-mode)
 (nix-mode)
 (rust-mode)
 (haskell-mode)
-
-
+(load-file (let ((coding-system-for-read 'utf-8)) (shell-command-to-string "agda-mode locate")))
+;;(agda2-mode)
 ;; lsp language hooks
 (add-hook 'rust-mode-hook 'lsp)
 (add-hook 'haskell-mode-hook 'lsp)
 (add-hook 'java-mode-hook 'lsp)
 (add-hook 'coq-mode-hook #'company-coq-mode)
+
+;; dap configuration
+(dap-mode)
+(dap-ui-mode)
+(dap-tooltip-mode)
+(tooltip-mode)
+(dap-ui-controls-mode)
+
+;; prittify text
+(setq company-coq-features/prettify-symbols-in-terminals t)
+(set-fontset-font t 'unicode (font-spec :name "XITS Math") nil 'prepend)
+(add-hook 'coq-mode-hook
+	  (lambda ()
+	    (setq-local prettify-symbols-alist
+			'(("~" . "¬")))))
+
+(add-hook 'idris2-mode-hook
+	  (lambda ()
+	    (setq-local prettify-symbols-alist
+			'(("Not" . "¬")
+                          ("\" . "λ")
+                          ("/=" . "≠")
+                          ("===" . "≡")
+                          (":=" . "≔")
+			  ("->" . "→")
+                          ("<-" . "←")
+                          ("<->" . "↔")
+                          ("<=>" . "⇔")
+                          ("=>" . "⇒")
+                          ("/\" . "∧")
+                          ("\/" . "∨")
+                          ("forall" . "∀")
+                          ("exists" . "∃")
+                          ("True" . "⊤")
+                          ("False" . "⊥")
+                          ("Bool" . "𝔹")
+                          ("Int" . "ℤ")
+                          ("Nat" . "ℕ")
+                          ("return" . "↑")
+                          ("where" . "∴")))))

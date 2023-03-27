@@ -10,6 +10,7 @@
   programs.nix-ld.enable = true;
   nix.optimise.automatic = true;
 
+
   services.transmission.enable = true;
 
   services.udisks2.enable = true;
@@ -32,18 +33,7 @@
   programs.seahorse.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
-      };
-      initial_session = {
-        command = "Hyprland";
-        user = "mason";
-      };
-    };
-  };
+  programs.regreet.enable = true;
   
   services.dbus.enable = true;
   services.octoprint.enable = true;
@@ -87,17 +77,13 @@
     extraGroups = [ "networkmanager" "transmission" "wheel" "libvirtd" "video" "audio" "kvm" "dialout" "octoprint" "greetd"];
     shell = pkgs.zsh;
   };
+  programs.zsh.enable = true;
 
   # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

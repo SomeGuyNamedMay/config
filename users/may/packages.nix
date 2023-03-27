@@ -24,8 +24,8 @@ in
             enableFPS = true;
             enableIntro = true;
         })
-        ytfzf ani-cli minecraft fuzzel
-
+        youtube-tui ani-cli minecraft fuzzel
+        neovide
         xfce.thunar imv evince pavucontrol helvum
         blueberry wlogout fractal zathura gimp
         libreoffice inkscape 
@@ -36,15 +36,14 @@ in
 
         cachix aria2 jetbrains.idea-community
         # text stuff
-        texlive.combined.scheme-medium texlab emacs-all-the-icons-fonts
+        texlive.combined.scheme-medium texlab emacs-all-the-icons-fonts dejavu_fonts dejavu_fontsEnv xits-math nerdfonts
         ##ltex-ls pandoc
         #config format stuff
         nil nixfmt taplo yaml-language-server marksman      
         #programming stuff
-        ghc cabal-install stack haskell-language-server stylish-haskell stack git
-        rustc cargo rust-analyzer rustfmt clang astyle 
-        maven openjdk19 jdt-language-server
-        (python3.withPackages pythonPackages) coq
+        git clang astyle
+        maven openjdk19
+        (python3.withPackages pythonPackages) coq agda idris2
     ] ++ (with rubyPackages_3_1; [
   ruby rufo
   solargraph

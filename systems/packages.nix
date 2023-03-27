@@ -6,6 +6,7 @@
     trashy
     tldr
     pamixer
+    playerctl
     home-manager
   ];
 }

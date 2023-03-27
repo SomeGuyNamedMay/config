@@ -11,6 +11,17 @@ let
       };
       meta.homepage = "https://github.com/stoand/kakoune-idris/";
   };
+  kakoune-coq = pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
+      pname = "Coqoune";
+      version = "0.0.0";
+      src = pkgs.fetchFromGitHub {
+          owner = "Guest0x0";
+          repo = "coqoune";
+          rev = "2b79631b57044387c24372687b8b8bd7dd29ad17";
+          sha256 = "daCL0ntqgf07r4a7OVjbJLhwRoeQixdyjO6dW8N4mVk=";
+      };
+      meta.homepage = "https://github.com/Guest0x0/coqoune";
+  };
 in
 {
     programs.kakoune = {
@@ -43,6 +54,7 @@ in
             kak-fzf
             powerline-kak
             kakoune-idris
+            kakoune-coq
             auto-pairs-kak
             openscad-kak
             kakoune-rainbow
