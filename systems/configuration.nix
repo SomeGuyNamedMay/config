@@ -17,19 +17,10 @@
 
   programs.light.enable = true;
 
-
-
   services.upower.enable = true;
 
   programs.dconf.enable = true;
   programs.gamemode.enable = true;
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-    ];
-  };
   programs.seahorse.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
@@ -43,10 +34,6 @@
   programs.hyprland.enable = true;
 
   services.tumbler.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -63,12 +50,6 @@
   # Enable sound with pipewire.
   security.rtkit.enable = true;
 
-  #fonts = {
-  #    fonts = with pkgs;  [
-  #        cascadia-code
-  #        nerdfonts
-  #    ];
-  #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mason = {
@@ -79,24 +60,5 @@
   };
   programs.zsh.enable = true;
 
-  # programs.mtr.enable = true;
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
-
+  system.stateVersion = "22.05";
 }
