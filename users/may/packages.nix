@@ -27,7 +27,7 @@ in
         youtube-tui ani-cli minecraft fuzzel
         neovide
         xfce.thunar imv evince pavucontrol helvum
-        blueberry wlogout fractal zathura gimp
+        blueberry wlogout zathura gimp
         libreoffice inkscape 
         openscad freecad hikari cura
         xdg-utils mpvpaper betterdiscordctl 

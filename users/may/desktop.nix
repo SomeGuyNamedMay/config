@@ -59,8 +59,8 @@
         layer = "top";
         position = "top";
         height = 20;
-        modules-left = [ "user" "mpris" "wlr/workspaces" ];
-        modules-center = [ "hyprland/window" ];
+        modules-left = [ "user" "mpris" "wlr/workspaces" "backlight" ];
+        modules-center = [ "hyprland/window"];
         modules-right = [ "tray" "wireplumber" "network" "upower" "clock" ];
         "user" = {
           format = "{user}";

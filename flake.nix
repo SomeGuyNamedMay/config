@@ -46,6 +46,7 @@
           };
           stylix.targets = {
               grub.useImage = true;
+#              waybar.enableLeftAccent = false;
           };
           nixpkgs.overlays = [
               (import emacs-overlay)
@@ -65,6 +66,10 @@
                 ./users/may/programming-env.nix
                 ./users/may/shell.nix
             ];
+            stylix.targets.waybar = {
+#                enableLeftBackColors = true;
+                enableRightBackColors = true;
+            };
             nixpkgs.overlays = [
                 (import emacs-overlay)
             ];
