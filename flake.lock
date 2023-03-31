@@ -306,15 +306,16 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1680130955,
-        "narHash": "sha256-wMgmEqAozSIN72VtnbiSCfcUlJVSf+pnI60QENC8Qx0=",
+        "lastModified": 1680213156,
+        "narHash": "sha256-16+x1rWZDxcgvpUPChBMjF0fPCnQ2fjahgc17o0swHA=",
         "owner": "SomeGuyNamedMy",
         "repo": "stylix",
-        "rev": "6860f44185a12ce0aabf7cc3aed5d86a468b8da5",
+        "rev": "9e1b33df326defaafce4a32c9e3b20755758b3aa",
         "type": "github"
       },
       "original": {
         "owner": "SomeGuyNamedMy",
+        "ref": "hyprland-support",
         "repo": "stylix",
         "type": "github"
       }

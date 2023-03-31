@@ -6,7 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
-    stylix.url = "github:SomeGuyNamedMy/stylix";
+    stylix.url = "github:SomeGuyNamedMy/stylix/hyprland-support";
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +22,7 @@
         hyprland.nixosModules.default
         home-manager.nixosModules.home-manager
         {
-          stylix.image = ./resources/wallpapers/log-horizon.jpg;
+          stylix.image = ./resources/wallpapers/ffxiv-wallpaper.jpg;
           stylix.polarity = "dark";
           stylix.fonts = {
             serif = {
@@ -46,7 +46,6 @@
           };
           stylix.targets = {
               grub.useImage = true;
-#              waybar.enableLeftAccent = false;
           };
           nixpkgs.overlays = [
               (import emacs-overlay)
@@ -67,7 +66,7 @@
                 ./users/may/shell.nix
             ];
             stylix.targets.waybar = {
-#                enableLeftBackColors = true;
+                enableLeftBackColors = true;
                 enableRightBackColors = true;
             };
             nixpkgs.overlays = [
