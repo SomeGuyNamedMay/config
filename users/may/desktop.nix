@@ -28,13 +28,21 @@
     "org/gnome/desktop/wm/preferences" = { button-layout = "menu:appmenu"; };
   };
 
+  services.gammastep = {
+      enable = true;
+      provider = "geoclue2";
+      tray = true;
+      #dawnTime = "6:00-7:45"
+      #duskTime = "18:35-20:15"
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
     recommendedEnvironment = true;
     xwayland = {
       enable = true;
-      hidpi = true;
+      hidpi = false;
     };
     nvidiaPatches = false;
     extraConfig = builtins.readFile ./hyprland.conf + ''
@@ -44,6 +52,26 @@
     '';
   };
 
+  services.swayidle = {
+      enable = true;
+      events = [
+          {
+              event = "before-sleep";
+              command = "${pkgs.swaylock}/bin/swaylock";
+          }
+          {
+              event = "lock";
+              command = "lock";
+          }
+      ];
+      timeouts = [
+          {
+              timeout = 60;
+              command = "${pkgs.swaylock}/bin/swaylock -fF";
+          }
+      ];
+      systemdTarget = "graphical-session.target";
+  };
 
   programs.waybar = {
     enable = true;

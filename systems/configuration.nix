@@ -10,6 +10,12 @@
   programs.nix-ld.enable = true;
   nix.optimise.automatic = true;
 
+  location.provider = "geoclue2";
+  services.geoclue2 = {
+      enable = true;
+  };
+  services.automatic-timezoned.enable = true;
+
 
   services.transmission.enable = true;
 
@@ -50,6 +56,11 @@
   # Enable sound with pipewire.
   security.rtkit.enable = true;
 
+  security.pam.services = {
+      swaylock = {
+          text = "auth include login";
+      };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mason = {

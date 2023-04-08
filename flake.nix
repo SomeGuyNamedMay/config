@@ -66,8 +66,12 @@
                 ./users/may/shell.nix
             ];
             stylix.targets.waybar = {
-                enableLeftBackColors = true;
+ #               enableLeftBackColors = true;
                 enableRightBackColors = true;
+            };
+            stylix.opacity = {
+                terminal = 0.8;
+                applications = 0.8;
             };
             nixpkgs.overlays = [
                 (import emacs-overlay)

@@ -1,4 +1,21 @@
 { pkgs, config, lib, ... }: {
+
+  programs.neovim = {
+      enable = true;
+      coc.enable = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+      extraPackages = with pkgs; [
+          agda
+      ];
+      plugins = with pkgs.vimPlugins; [
+          agda-vim
+      ];
+      extraConfig = ''
+        let maplocalleader = ","
+      '';
+  };
   programs.emacs = {
     enable = true;
     package = pkgs.emacsPgtk;

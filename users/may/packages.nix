@@ -18,22 +18,23 @@ in
 
     home.packages = with pkgs; [
         #games
-        lutris bottles gamescope xivlauncher
-        steam onscripter-en discord gtkcord4 osu-lazer
+        minecraft lutris bottles gamescope xivlauncher
+        steam onscripter-en gtkcord4 osu-lazer
         blesh airshipper (dwarf-fortress-packages.dwarf-fortress-full.override {
             enableFPS = true;
             enableIntro = true;
         })
-        youtube-tui ani-cli minecraft fuzzel
-        neovide
+
+        #media
+        youtube-tui ani-cli 
+        swaylock 
         xfce.thunar imv evince pavucontrol helvum
         blueberry wlogout zathura gimp
-        libreoffice inkscape 
-        openscad freecad hikari cura
+        #libreoffice inkscape
+        openscad cura
         xdg-utils mpvpaper betterdiscordctl 
         #shell stuff
         thefuck tldr tremc
-
         cachix aria2 jetbrains.idea-community
         # text stuff
         texlive.combined.scheme-medium texlab emacs-all-the-icons-fonts dejavu_fonts dejavu_fontsEnv xits-math nerdfonts
