@@ -19,10 +19,9 @@
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       shared-modules = [
         stylix.nixosModules.stylix
-        hyprland.nixosModules.default
         home-manager.nixosModules.home-manager
         {
-          stylix.image = ./resources/wallpapers/ffxiv-wallpaper.jpg;
+          stylix.image = ./resources/wallpapers/raison-detre.jpg;
           stylix.polarity = "dark";
           stylix.fonts = {
             serif = {
@@ -66,12 +65,14 @@
                 ./users/may/shell.nix
             ];
             stylix.targets.waybar = {
- #               enableLeftBackColors = true;
+                enableLeftBackColors = true;
                 enableRightBackColors = true;
             };
             stylix.opacity = {
-                terminal = 0.8;
-                applications = 0.8;
+                terminal = 0.90;
+                applications = 0.90;
+                popups = 0.90;
+                desktop = 0.90;
             };
             nixpkgs.overlays = [
                 (import emacs-overlay)

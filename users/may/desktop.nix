@@ -32,8 +32,8 @@
       enable = true;
       provider = "geoclue2";
       tray = true;
-      #dawnTime = "6:00-7:45"
-      #duskTime = "18:35-20:15"
+      dawnTime = "6:00-7:45";
+      duskTime = "18:35-20:15";
   };
 
   wayland.windowManager.hyprland = {
@@ -45,11 +45,9 @@
       hidpi = false;
     };
     nvidiaPatches = false;
-    extraConfig = builtins.readFile ./hyprland.conf + ''
-      bind=SUPER_SHIFT,Q,exec,${pkgs.wlogout}/bin/wlogout
-    '' + ''
-      bind=SUPER,SPACE,exec,rofi -show
-    '';
+    extraConfig = builtins.readFile ./hyprland.conf +
+      "bind=SUPER_SHIFT,Q,exec,${pkgs.wlogout}/bin/wlogout\n" +
+      "bind=SUPER,SPACE,exec,rofi -show\n";
   };
 
   services.swayidle = {
@@ -128,6 +126,14 @@
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
+    terminal = "${pkgs.foot}/bin/foot";
+    plugins = with pkgs; [
+        rofi-top
+        rofi-emoji
+        rofi-calc
+        rofi-pulse-select
+        rofi-file-browser
+    ];
     extraConfig = {
       modi = "drun,run";
       sidebar-mode = true;

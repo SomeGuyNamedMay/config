@@ -18,20 +18,19 @@ in
 
     home.packages = with pkgs; [
         #games
-        minecraft lutris bottles gamescope xivlauncher
+        minecraft lutris gamescope xivlauncher
         steam onscripter-en gtkcord4 osu-lazer
         blesh airshipper (dwarf-fortress-packages.dwarf-fortress-full.override {
             enableFPS = true;
             enableIntro = true;
-        })
-
+        }) rofi-mpd rofi-bluetooth rofi-power-menu rofi-systemd
         #media
         youtube-tui ani-cli 
         swaylock 
         xfce.thunar imv evince pavucontrol helvum
         blueberry wlogout zathura gimp
-        #libreoffice inkscape
-        openscad cura
+        libreoffice 
+        openscad cura discord
         xdg-utils mpvpaper betterdiscordctl 
         #shell stuff
         thefuck tldr tremc
